@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start:dev": "SET NODE_ENV=development && nodemon index.ts",
+    "start:dev": "SET NODE_ENV=development && nodemon src/index.ts",
     "start:prod": "SET NODE_ENV=production && nodemon index.ts"
   },
   "author": "",
