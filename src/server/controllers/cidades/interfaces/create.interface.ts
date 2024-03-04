@@ -1,3 +1,4 @@
 export interface ICidade {
-    nome: string;
+    nome: string,
+    estado: string
 }
