@@ -1,9 +1,20 @@
-import { Request, Response } from 'express';
 import { ICidade } from './interfaces/create.interface';
-import { StatusCodes } from 'http-status-codes';
+import { IFilter } from './interfaces/query.interface';
+import { validation } from '../../shared/middlewares';
+import { Request, Response } from 'express';
+import * as yup from 'yup';
 
-export const create = (req: Request<{}, {}, ICidade>, res: Response) => {
-    console.log(req.body);
-    if (!req.body.nome) return res.status(StatusCodes.BAD_REQUEST).send('Informe o atributo nome');
-    res.send(req.body);
+export const createValidation = validation.validation((getSchema) => ({
+    body: getSchema<ICidade>(yup.object().shape({
+        nome: yup.string().required().min(3),
+        estado: yup.string().required().min(3),
+    })),
+    query: getSchema<IFilter>(yup.object().shape({
+        filter: yup.string().required().min(3),
+    }))
+}));
+
+export const create = async (req: Request<{}, {}, ICidade>, res: Response) => {
+
+    return res.send(req.body);
 };
